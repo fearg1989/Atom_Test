@@ -1,0 +1,76 @@
+<div class="tasks-container">
+  <h1 class="tasks-title">Lista de Tareas</h1>
+
+  <form (ngSubmit)="editingTask ? saveTask() : addTask()" class="task-form">
+    <div class="form-group">
+      <label for="title">Título de la tarea</label>
+      <input
+        id="title"
+        type="text"
+        [(ngModel)]="newTitle"
+        name="title"
+        placeholder="Escribe el título"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">Descripción de la tarea</label>
+      <input
+        id="description"
+        type="text"
+        [(ngModel)]="newTask"
+        name="description"
+        placeholder="Escribe la descripción"
+        required
+      />
+    </div>
+    <button type="submit" class="primary">
+      {{ editingTask ? 'Guardar Cambios' : 'Agregar Tarea' }}
+    </button>
+    <button
+      type="button"
+      class="secondary"
+      *ngIf="editingTask"
+      (click)="cancelEdit()"
+    >
+      Cancelar
+    </button>
+  </form>
+
+  <table *ngIf="tasks.length > 0; else noTasks" class="tasks-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Fecha de Creación</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.createdAt | date: 'short' }}</td>
+        <td>
+          {{ task.completed ? 'Completada' : 'Pendiente' }}
+          <input
+            type="checkbox"
+            [checked]="task.completed"
+            (change)="toggleTaskCompletion(task)"
+          />
+        </td>
+        <td>
+          <button (click)="editTask(task)" class="edit-btn">Editar</button>
+          <button (click)="deleteTask(task.id!)" class="delete-btn">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noTasks>
+    <p class="no-tasks-message">No hay tareas creadas.</p>
+  </ng-template>
+
+  <button (click)="logout()" class="logout-btn">Cerrar Sesión</button>
+</div>
