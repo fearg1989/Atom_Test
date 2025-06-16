@@ -40,7 +40,14 @@ Atom_Test/
    PORT=3000
    FIREBASE_SERVICE_ACCOUNT=path/al/archivo/credenciales-firebase.json
    ```
-5. Compila TypeScript:
+5. Configura las variables de la base de datos enviada por correo:
+```
+Crea el Archivo 'firebase-service-account.json'
+en la ruta:
+backend/src/infrastructure/database/config/firebase-service-account.json
+```
+
+7. Compila TypeScript:
    ```bash
    npm run build
    ```
@@ -53,7 +60,11 @@ Atom_Test/
 
 El frontend es una SPA (Single Page Application) básica en `backend/public` que usa Firebase para autenticación y base de datos. Para probarlo en local:
 
-1. Una vez que el backend esté levantado (`npm run dev`), abre el archivo `backend/public/index.html` en tu navegador, o sirve la carpeta `public` usando cualquier servidor estático (por ejemplo, con la extensión Live Server de VSCode).
+1. Instala el cliente Angular ejecutando 'npm install -g @angular/cli' en la ruta frontend.
+2. Ejecutar el front con:
+   ```
+   ng serve
+   ```
 
 ---
 
